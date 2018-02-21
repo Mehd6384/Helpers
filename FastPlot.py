@@ -1,7 +1,11 @@
 import matplotlib.pyplot as plt 
 import numpy as np 
 
-class FastPlotter(): 
+
+# To use this class: Simply initialize with the number of actions you want to monitor 
+# Then, call draw whenever you want to update the plot 
+
+class ThinkFast(): 
 
 	def __init__(self, nb_actions):
 
@@ -40,4 +44,42 @@ class FastPlotter():
 		self.fig.canvas.flush_events()
 
 
+# To use this class: Simply initialize with the number of matrices you want to monitor 
+# This will create axis
+# Then, call draw whenever you want to update the plot 
 
+class FastWeight(): 
+
+	def __init__(self, nb): 
+
+		self.nb = nb
+		self.up = False
+		self.images = []
+
+	def draw(self, vals): 
+
+		if not self.up: 
+			self.up = True
+			self.init_plot()
+
+		self.update(vals)
+
+	def init_plot(self): 
+
+		plt.style.use('ggplot')
+		plt.ion()
+
+		self.fig, self.ax = plt.subplots(1,self.nb)
+		x = np.zeros((10,10))
+		for a in self.ax: 
+			im = a.matshow(x)
+			self.images.append(im)
+
+		self.fig.canvas.draw()
+
+	def update(self, vals): 
+
+		for i,a,v in zip(self.images, self.ax, vals): 
+			a.matshow(v)
+		self.fig.canvas.update()
+		self.fig.canvas.flush_events()
