@@ -11,7 +11,12 @@ class ThinkFast():
 
 		self.nb_actions = nb_actions
 		self.up = False
+		self.has_name = False
 
+	def set_names(self, names): 
+
+		self.has_name = True 
+		self.names = names
 
 	def draw(self, vals): 
 
@@ -27,6 +32,13 @@ class ThinkFast():
 		plt.ion()
 
 		self.fig, self.ax = plt.subplots()
+		self.ax.set_title('Agents actions probabilities')
+		self.ax.set_xlabel('Possible actions')
+		self.ax.set_ylabel('Probability')
+		if self.has_name: 
+			self.ax.set_xticks(np.arange(self.nb_actions)*1. + 0.5)
+			self.ax.set_xticklabels(self.names)
+			print('set')
 		self.ax.set_ylim(0.,1.)
 
 		x = np.arange(self.nb_actions)
@@ -80,6 +92,7 @@ class FastWeight():
 	def update(self, vals): 
 
 		for i,a,v in zip(self.images, self.ax, vals): 
-			a.matshow(v)
+			i = a.matshow(v)
+
 		self.fig.canvas.update()
 		self.fig.canvas.flush_events()
