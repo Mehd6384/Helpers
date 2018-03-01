@@ -59,8 +59,8 @@ class ThinkFast():
 
 class FastStateValue(): # To use this class, initialize with max steps of the environment. Then, draw with the latest state 
 						# value and information concerning termination of the episode 
-						# Also, using previous allows to see previous state estimations of the critic. Can be useful
-
+						# Also, using previous allows to see previous state estimations of the critic. 
+						
 	def __init__(self, max_length, previous = 3): 
 
 		self.max_length = max_length + 1
