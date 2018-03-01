@@ -1,5 +1,5 @@
 import numpy as np 
-
+# For curriculum learning 
 # To use this class, first generate levels and pass them to the Planner. Start the Planner 
 # and have it check performance of the agent regurlary 
 
